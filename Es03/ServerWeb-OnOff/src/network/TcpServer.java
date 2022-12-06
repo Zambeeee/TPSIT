@@ -3,7 +3,8 @@
  * Lettura dati multi riga provenienti dal client
  * 
  * from folder network/..
- * javac network/TcpServer.java; java network.TcpServer 
+ * cd Es03/ServerWeb/src/network
+ * java TcpServer.java
  */
 package network;
 
@@ -16,7 +17,6 @@ public class TcpServer {
 		
 		final int SERVER_PORT=8765;
 		String clientMsg = "";
-		
 		try {			 
 			// Creazione del socket sul server e ascolto sulla porta
 			ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
@@ -43,9 +43,23 @@ public class TcpServer {
 				//Invio dei dati su stream di rete al client
 				clientMsg = "HTTP/1.1 200 OK\r\n";
 				//clientMsg += "Connection: close\r\n";
-				//clientMsg += "Content-Type: text/plain\r\n";
+				clientMsg += "Content-Type: text/plain\r\n";
 				clientMsg += "\r\n";
-				clientMsg += "Saluti dal web server Java";
+				
+				
+				String parola = "";
+				String myArray[] = clientMsg.split(" ");
+				for(int i=0; i<100; i++) {
+					if(myArray[i] == "on") {
+						parola = "accendo";
+					}
+				}
+				if(parola == "accendo"){
+					clientMsg += "Accendo le luci";
+				}
+				
+				
+
 				outStream.write(clientMsg.getBytes());
 				outStream.flush();
 
