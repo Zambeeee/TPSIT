@@ -17,6 +17,8 @@ public class TcpServer {
 		
 		final int SERVER_PORT=8765;
 		String clientMsg = "";
+		String parola = "";
+
 		try {			 
 			// Creazione del socket sul server e ascolto sulla porta
 			ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
@@ -34,9 +36,8 @@ public class TcpServer {
 	
 				// ---------------------------------------------------------
 				//Lettura dati dal client un righa alla volta   
-				while ((clientMsg=inStream.readLine()).length() != 0) {
-					System.out.println(clientMsg);	
-				}  
+				clientMsg=inStream.readLine();
+				System.out.println(clientMsg);	
 				// Elaborare qui i dati ricevuti dal client 
 				// ---------------------------------------------------------
 
@@ -46,18 +47,18 @@ public class TcpServer {
 				clientMsg += "Content-Type: text/plain\r\n";
 				clientMsg += "\r\n";
 				
+				clientMsg=inStream.readLine();
 				
-				String parola = "";
+				
+				
 				String myArray[] = clientMsg.split(" ");
 				for(int i=0; i<100; i++) {
-					if(myArray[i] == "on") {
-						parola = "accendo";
+					if(myArray[i] == "ON") {
+						clientMsg = "Accendo le luci";
 					}
 				}
-				if(parola == "accendo"){
-					clientMsg += "Accendo le luci";
-				}
 				
+				System.out.println(clientMsg);
 				
 
 				outStream.write(clientMsg.getBytes());
