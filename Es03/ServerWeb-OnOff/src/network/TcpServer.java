@@ -44,7 +44,7 @@ public class TcpServer {
                 // Elaborare qui i dati ricevuti dal client 
 
                 clientMsg.trim();	//tolgo gli spazi all'inizio e alla fine della stringa
-				String clientMsgArr[]=clientMsg.split("\\s+");
+				String arrayCliMsg[]=clientMsg.split("\\s+");
 
 				//Invio dei dati su stream di rete al client
 				serverMsg = "HTTP/1.1 200 OK\r\n";
@@ -52,7 +52,7 @@ public class TcpServer {
 				serverMsg += "Content-Type: text/html\r\n"; 
                 serverMsg += "\r\n";
 				
-                switch(clientMsgArr[1]) {
+                switch(arrayCliMsg[1]) {
 
 				    case "/":
 						serverMsg += "<b><h2>Saluti da Marco Zambelan!!</h2></b>";
